@@ -7,6 +7,7 @@ import authRoutes from "./routes/auth.routes";
 import { authenticate } from "./middlewares/auth.middleware";
 import productRoutes from "./routes/product.routes";
 import userRoutes from "./routes/user.routes";
+import { setupSwagger } from "./swagger";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -34,12 +35,14 @@ app.get("/", (req, res) => {
   res.send("API Sales Dashboard rodando!");
 });
 
+setupSwagger(app);
 console.log("Ambiente:", process.env.NODE_ENV || "development");
 
 // Só roda o listen se NÃO estiver em teste
 if (process.env.NODE_ENV !== "test") {
   app.listen(PORT, () => {
     console.log(`Servidor rodando em http://localhost:${PORT}`);
+    console.log("Docs disponíveis em http://localhost:3000/api-docs");
   });
 }
 
