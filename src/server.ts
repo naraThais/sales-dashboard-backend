@@ -35,6 +35,9 @@ app.get("/", (req, res) => {
   res.send("API Sales Dashboard rodando!");
 });
 
+// O CORS é habilitado globalmente logo após a criação do app:
+app.use(cors());
+
 setupSwagger(app);
 console.log("Ambiente:", process.env.NODE_ENV || "development");
 

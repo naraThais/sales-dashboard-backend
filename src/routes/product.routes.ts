@@ -8,7 +8,8 @@ import {
   updateProductController,
   deleteProductController,
 } from "../controllers/product.controller";
-
+import { validateParams } from "../middlewares/validateParams";
+import { productSchema } from "../schemas/product.schema";
 const router = Router();
 
 /**
@@ -165,6 +166,7 @@ router.post(
   authenticate,
   upload.single("image"),
   authorizeRoles("admin"),
+  validateParams(productSchema),
   createProductController
 );
 /**

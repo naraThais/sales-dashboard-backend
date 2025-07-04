@@ -8,11 +8,15 @@ export async function createUser(
   name: string,
   email: string,
   password: string,
-  role = "user"
-): Promise<User> {
-  const hashed = await bcrypt.hash(password, SALT_ROUNDS);
+  role: string
+) {
   return prisma.user.create({
-    data: { name, email, password: hashed, role },
+    data: {
+      name,
+      email,
+      password,
+      role,
+    },
   });
 }
 
